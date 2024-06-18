@@ -1,0 +1,8 @@
+[mariadb]
+bind-address = 0.0.0.0
+server-id = 2
+log_bin = primary-bin
+log-bin-index = primary-bin.index
+
+replicate_do_table = mariadb_replication_test.table1
+replicate_do_table = mariadb_replication_test.table3

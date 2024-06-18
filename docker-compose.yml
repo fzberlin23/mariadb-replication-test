@@ -1,0 +1,27 @@
+services:
+    primary:
+        build: docker/primary
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: mariadb_replication_test
+        ports:
+            - 3306:3306
+        volumes:
+            - primary_data:/var/lib/mysql
+            - ./docker/primary/99-mariadb-replication-test.cnf:/etc/mysql/mariadb.conf.d/99-mariadb-replication-test.cnf
+    replica:
+        build: docker/replica
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: mariadb_replication_test
+        depends_on:
+            - primary
+        ports:
+            - 3307:3306
+        volumes:
+            - replica_data:/var/lib/mysql
+            - ./docker/replica/99-mariadb-replication-test.cnf:/etc/mysql/mariadb.conf.d/99-mariadb-replication-test.cnf
+
+volumes:
+    primary_data:
+    replica_data:

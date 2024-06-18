@@ -1,0 +1,5 @@
+[mariadb]
+bind-address = 0.0.0.0
+server-id = 1
+log_bin = primary-bin
+log-bin-index = primary-bin.index
